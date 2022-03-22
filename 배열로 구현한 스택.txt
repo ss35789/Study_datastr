@@ -1,0 +1,77 @@
+import java.util.*;
+
+class Stacko {
+	
+	Stacko(){
+		this.s=new int[100];
+	}
+	
+	Stacko(int n){
+		this.s=new int[n];
+	}
+	
+	
+	private int [] s;
+	private int h=-1;//현재 우리가 보는 인덱스
+	
+	public int size() {
+		return this.s.length;
+	}
+	
+	
+	public void push(int ele) {
+		
+		
+		try {
+
+			h++;
+			s[h]=ele;
+			System.out.println("스택에 "+ele+" 값이 추가되었습니다.");
+		}catch(Exception e) {
+			System.out.println("스택이 꽉 찼습니다.");
+		}
+		
+	}
+	
+	public int pop() {
+		
+		try {
+			int del=this.s[h];
+			
+			s[h]=0;
+			h--;
+			System.out.println("스택에 "+del+" 값이 삭제되었습니다.");
+			return del;
+		}catch(Exception e) {
+			System.out.println("스택이 비었습니다.");
+		}
+		return 0;
+	}
+	
+	public int peek() {
+		System.out.println("다음에 나올 값은 "+s[h]+" 입니다.");
+		return s[h];
+	}
+}
+public class HelloWorld {
+
+	public static void main(String[] args) {
+		Stacko st=new Stacko();
+		System.out.println(st.size());
+		
+		st.push(4);
+		st.push(5);
+		st.push(6);
+		st.push(7);
+		st.push(8);
+		st.peek();
+		st.pop();
+		
+		
+
+	}
+	
+	
+	
+
+}

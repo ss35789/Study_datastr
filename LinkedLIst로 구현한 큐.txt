@@ -1,0 +1,105 @@
+
+class Node{
+   private int value;
+   private   Node next; //다음 노드
+   Node(){
+      value=0;
+      
+   }
+   Node(int ele){
+      value=ele;
+      
+   }
+   
+   public int getValue() {
+      return this.value;
+   }
+   public Node getnextNode() {
+      return this.next;
+   }
+   public Node setnextNode(Node n) {
+      return this.next=n; //다음 노드를 n으로 지정
+   }
+}
+
+class Queue {
+   
+   Node head=new Node();
+   Node last=head;
+   int count=0;
+   
+   public boolean isEmpty() {
+      if(count ==0)return true;
+      return false;
+   }
+   
+   public void offer(int ele) {
+      try {
+         
+         Node n=new Node(ele);
+         last.setnextNode(n);//last가 가리키는 노드의 인자 next(다음 노드의 좌표)를 n 노드로 설정
+         last=n;            // last가 가리키는 노드를 n으로 설정
+         System.out.println(ele+" 값을 추가합니다.");
+         count++;
+         if(count==1) {//큐가 완전히 비워지면 새로만든 헤드노드의 다음 노드로 head값이 오게 하기위함
+            head=last; 
+         }
+      }catch(Exception e) {
+         System.out.println("에러");
+         
+      }
+      
+   }
+
+   
+   public int poll() {//큐가 0이 되었을 때 poll()를 유도하는 head 값은 null이 되었지만
+            // offer()을 유도하는 last는 살아있기 때문에 다시 offer을 할 새 헤더노드를 안만들어도 됨
+      
+      try {
+         int del=head.getValue();
+         head=head.getnextNode();
+         System.out.println(del+" 값을 제거합니다. ");
+         count--;
+         return del;
+      }catch(Exception e) {
+         System.out.println("큐는 비어있습니다.");
+      }
+      return 0;
+   }
+   
+   public int peek() {
+      System.out.println("가장 최근에 추가한 값은"+last.getValue()+" 입니다.");
+      return last.getValue();
+   }
+   
+   public int size() {
+      System.out.println(" 현재 큐의 크기는 "+ count +"입니다.");
+      return this.count;
+   }
+}
+
+public class main {
+   
+   public static void main(String[] args) {
+      Queue q=new Queue();
+      q.offer(4);
+      q.offer(2);
+      q.offer(4);
+      
+      q.peek();
+      q.poll();
+      q.poll();
+      q.poll();
+      
+      q.size();
+      q.offer(7);
+      q.offer(2);
+      q.offer(4);
+      q.poll();
+      
+   }
+   
+   
+   
+
+}
